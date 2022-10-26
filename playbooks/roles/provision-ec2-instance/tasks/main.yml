@@ -69,7 +69,7 @@
   ec2_vpc_subnet_facts:
     region: "{{ ec2_region }}"
     filters:
-      "vpc-id": "{{ vpc_nets.vpcs[0].vpc_id }}"
+      vpc-id: "{{ vpc_nets.vpcs[0].vpc_id }}"
       defaultForAz: "true"
   register: vpc_subnets
   tags:
@@ -112,12 +112,12 @@
 #---- Launch EC2 instance ----
 - name: Launch an EC2 instance
   ec2:
-    key_name: vyos-build-ami
+    key_name: "{{ key_pair_name }}"
     assign_public_ip: True
-    vpc_subnet_id: "{{ vpc_subnets.subnets[0].vpc_subnet_id }}"
+    vpc_subnet_id: "{{ vpc_subnets.subnets[0].subnet_id }}"
     image: "{{ debian_ami.images[0].image_id }}"
     instance_type: "{{ instance_type }}"
-    region: us-east-1
+    region: "{{ ec2_region }}"
     group_id: "{{ security_group.group_id  }}"
     wait: yes
     instance_tags:
