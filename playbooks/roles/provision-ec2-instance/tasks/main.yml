@@ -114,7 +114,7 @@
   ec2:
     key_name: vyos-build-ami
     assign_public_ip: True
-    vpc_subnet_id: "{{ vpc_subnets.subnets[0].subnet_id }}"
+    vpc_subnet_id: "{{ vpc_subnets.subnets[0].vpc_subnet_id }}"
     image: "{{ debian_ami.images[0].image_id }}"
     instance_type: "{{ instance_type }}"
     region: us-east-1
