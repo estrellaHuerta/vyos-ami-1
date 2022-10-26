@@ -111,13 +111,13 @@
 
 #---- Launch EC2 instance ----
 - name: Launch an EC2 instance
-  ec2_instance:
-    key_name: "{{ key_pair_name }}"
+  ec2:
+    key_name: vyos-build-ami
     assign_public_ip: True
     vpc_subnet_id: "{{ vpc_subnets.subnets[0].subnet_id }}"
     image: "{{ debian_ami.images[0].image_id }}"
     instance_type: "{{ instance_type }}"
-    region: "{{ ec2_region }}"
+    region: us-east-1
     group_id: "{{ security_group.group_id  }}"
     wait: yes
     instance_tags:
